@@ -19,10 +19,12 @@ ROLES = {
         "contracts.add_contract",
         "contracts.change_contract",
         "contracts.view_contract",
+        "contracts.delete_contract",
         "leads.view_lead",
         "customers.add_customer",
         "customers.change_customer",
         "customers.view_customer",
+        "customers.delete_customer",
     ],
 }
 

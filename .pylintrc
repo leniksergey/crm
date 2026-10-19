@@ -1,0 +1,16 @@
+[MESSAGES CONTROL]
+
+disable=raw-checker-failed,
+        bad-inline-option,
+        locally-disabled,
+        file-ignored,
+        suppressed-message,
+        useless-suppression,
+        deprecated-pragma,
+        use-implicit-booleaness-not-comparison-to-string,
+        use-implicit-booleaness-not-comparison-to-zero,
+        use-symbolic-message-instead,
+        missing-module-docstring,
+        too-many-ancestors
+
+ignore-paths=.*/migrations/*,.*/settings.py,.*/manage.py,.*/apps.py

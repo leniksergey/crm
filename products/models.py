@@ -7,4 +7,4 @@ class Product(models.Model):
     cost = models.DecimalField("Стоимость", max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return self.name
+        return str(self.name)

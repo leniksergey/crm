@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.db.models.deletion import ProtectedError
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -45,3 +47,14 @@ class ProductDeleteView(ModelPermissionMixin, DeleteView):
     model = Product
     template_name = "products/products-delete.html"
     success_url = reverse_lazy("products:list")
+
+    def form_valid(self, form):
+        try:
+            return super().form_valid(form)
+        except ProtectedError:
+            messages.error(
+                self.request,
+                "Нельзя удалить услугу, на которую ссылаются рекламные кампании или контракты. "
+                "Сначала удалите или отвяжите зависимые объекты.",
+            )
+            return self.render_to_response(self.get_context_data(object=self.object))

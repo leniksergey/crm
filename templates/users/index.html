@@ -3,6 +3,7 @@
 {% block content %}
 <h2 class="fw-bold">Общая статистика</h2>
 <div class="row bg-white px-3 py-3 mx-2 my-5 rounded pb-5 shadow-lg">
+    {% if perms.products.view_product %}
     <div class="col">
         <div class="card border-light shadow" style="background: #eee">
             <div class="card-body bg-gray-900">
@@ -14,6 +15,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if perms.ads.view_advertisement %}
     <div class="col">
         <div class="card border-light shadow" style="background: #eee">
             <div class="card-body">
@@ -25,6 +28,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if perms.leads.view_lead %}
     <div class="col">
         <div class="card border-light shadow" style="background: #eee">
             <div class="card-body">
@@ -36,6 +41,8 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% if perms.customers.view_customer %}
     <div class="col">
         <div class="card border-light shadow">
             <div class="card-body" style="background: #eee">
@@ -47,5 +54,6 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 {% endblock %}

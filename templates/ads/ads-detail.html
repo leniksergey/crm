@@ -12,8 +12,12 @@
                 <p class="card-text">Канал: {{ object.channel }}</p>
                 <div class="d-flex justify-content-end fw-bold">{{ object.budget }}руб</div>
                 <div class="d-flex justify-content-center gap-2 fw-bold">
+                    {% if perms.ads.change_advertisement %}
                     <a href="/ads/{{ object.pk }}/edit" class="btn btn-primary">Редактировать</a>
+                    {% endif %}
+                    {% if perms.ads.delete_advertisement %}
                     <a href="/ads/{{ object.pk }}/delete" class="btn btn-danger">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

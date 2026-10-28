@@ -12,8 +12,12 @@
                 <p class="card-text"><a href="{{ object.file.url }}" target="_blank">Файл договора</a></p>
                 <div class="d-flex justify-content-end fw-bold">{{ object.cost }}руб</div>
                 <div class="d-flex justify-content-center gap-2 fw-bold">
+                    {% if perms.contracts.change_contract %}
                     <a href="/contracts/{{ object.pk }}/edit" class="btn btn-primary">Редактировать</a>
+                    {% endif %}
+                    {% if perms.contracts.delete_contract %}
                     <a href="/contracts/{{ object.pk }}/delete" class="btn btn-danger">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -38,9 +38,8 @@ class ProductUpdateView(ModelPermissionMixin, UpdateView):
     fields = FIELDS
     template_name = "products/products-edit.html"
 
-
-def get_success_url(self):
-    return reverse("products:detail", kwargs={"pk": self.object.pk})
+    def get_success_url(self):
+        return reverse("products:detail", kwargs={"pk": self.object.pk})
 
 
 class ProductDeleteView(ModelPermissionMixin, DeleteView):

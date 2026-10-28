@@ -82,6 +82,7 @@ class Command(BaseCommand):
                 "phone": "+79001112233",
                 "email": "ivanov@example.com",
                 "ad": ads[0],
+                "status": Lead.Status.WON,
             },
             {
                 "last_name": "Петров",
@@ -89,6 +90,7 @@ class Command(BaseCommand):
                 "phone": "+79001112244",
                 "email": "petrov@example.com",
                 "ad": ads[0],
+                "status": Lead.Status.NEGOTIATION,
             },
             {
                 "last_name": "Сидорова",
@@ -96,6 +98,7 @@ class Command(BaseCommand):
                 "phone": "+79001112255",
                 "email": "sidorova@example.com",
                 "ad": ads[1],
+                "status": Lead.Status.WON,
             },
             {
                 "last_name": "Козлов",
@@ -103,6 +106,7 @@ class Command(BaseCommand):
                 "phone": "+79001112266",
                 "email": "kozlov@example.com",
                 "ad": ads[1],
+                "status": Lead.Status.CONTACTED,
             },
             {
                 "last_name": "Новикова",
@@ -110,6 +114,7 @@ class Command(BaseCommand):
                 "phone": "+79001112277",
                 "email": "novikova@example.com",
                 "ad": ads[0],
+                "status": Lead.Status.NEW,
             },
         ]
         leads = []
@@ -121,8 +126,12 @@ class Command(BaseCommand):
                     "first_name": l["first_name"],
                     "email": l["email"],
                     "ad": l["ad"],
+                    "status": l["status"],
                 },
             )
+            if not created and lead.status != l["status"]:
+                lead.status = l["status"]
+                lead.save(update_fields=["status"])
             leads.append(lead)
             self.stdout.write(
                 f"Лид '{lead}': {'создан' if created else 'уже существует'}"

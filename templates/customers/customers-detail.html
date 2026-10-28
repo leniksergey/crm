@@ -15,8 +15,12 @@
                 </p>
                 <div class="d-flex justify-content-end fw-bold">{{ object.lead.email }}</div>
                 <div class="d-flex justify-content-center gap-2 fw-bold">
+                    {% if perms.customers.change_customer %}
                     <a href="/customers/{{ object.pk }}/edit" class="btn btn-primary">Редактировать</a>
+                    {% endif %}
+                    {% if perms.customers.delete_customer %}
                     <a href="/customers/{{ object.pk }}/delete" class="btn btn-danger">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

@@ -5,14 +5,17 @@ ROLES = {
     "Оператор": [
         "leads.add_lead",
         "leads.change_lead",
+        "leads.delete_lead",
         "leads.view_lead",
     ],
     "Маркетолог": [
         "products.add_product",
         "products.change_product",
+        "products.delete_product",
         "products.view_product",
         "ads.add_advertisement",
         "ads.change_advertisement",
+        "ads.delete_advertisement",
         "ads.view_advertisement",
     ],
     "Менеджер": [

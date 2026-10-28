@@ -1,5 +1,8 @@
+from decimal import Decimal
+
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import Count, Sum
+from django.db.models import Count, DecimalField, Sum, Value
+from django.db.models.functions import Coalesce
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -57,14 +60,24 @@ class AdStatisticView(LoginRequiredMixin, ListView):
         return Advertisement.objects.annotate(
             leads_count=Count("leads", distinct=True),
             customers_count=Count("leads__customer", distinct=True),
-            income=Sum("leads__customer__contract__cost"),
+            revenue=Coalesce(
+                Sum("leads__customer__contract__cost"),
+                Value(Decimal("0.00")),
+                output_field=DecimalField(max_digits=12, decimal_places=2),
+            ),
         )
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         for ad in context["ads"]:
-            if ad.income and ad.budget:
-                ad.profit = round(ad.income / ad.budget, 2)
+            if ad.leads_count:
+                ad.conversion_rate = (
+                    Decimal(ad.customers_count) / Decimal(ad.leads_count) * 100
+                ).quantize(Decimal("0.01"))
             else:
-                ad.profit = None
+                ad.conversion_rate = None
+            if ad.budget:
+                ad.roas = (ad.revenue / ad.budget).quantize(Decimal("0.01"))
+            else:
+                ad.roas = None
         return context

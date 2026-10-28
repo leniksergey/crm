@@ -11,8 +11,12 @@
                 <p class="card-text">{{ object.description }}</p>
                 <div class="d-flex justify-content-end fw-bold">{{ object.cost }}руб</div>
                 <div class="d-flex justify-content-center gap-2 fw-bold">
+                    {% if perms.products.change_product %}
                     <a href="/products/{{ object.pk }}/edit" class="btn btn-primary">Редактировать</a>
+                    {% endif %}
+                    {% if perms.products.delete_product %}
                     <a href="/products/{{ object.pk }}/delete" class="btn btn-danger">Удалить</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

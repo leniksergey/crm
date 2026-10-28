@@ -90,7 +90,7 @@ class Command(BaseCommand):
                 "phone": "+79001112244",
                 "email": "petrov@example.com",
                 "ad": ads[0],
-                "status": Lead.Status.NEGOTIATION,
+                "status": Lead.Status.WON,
             },
             {
                 "last_name": "Сидорова",
@@ -106,7 +106,7 @@ class Command(BaseCommand):
                 "phone": "+79001112266",
                 "email": "kozlov@example.com",
                 "ad": ads[1],
-                "status": Lead.Status.CONTACTED,
+                "status": Lead.Status.LOST,
             },
             {
                 "last_name": "Новикова",
@@ -115,6 +115,14 @@ class Command(BaseCommand):
                 "email": "novikova@example.com",
                 "ad": ads[0],
                 "status": Lead.Status.NEW,
+            },
+            {
+                "last_name": "Смирнов",
+                "first_name": "Алексей",
+                "phone": "+79001112288",
+                "email": "smirnov@example.com",
+                "ad": ads[1],
+                "status": Lead.Status.NEGOTIATION,
             },
         ]
         leads = []

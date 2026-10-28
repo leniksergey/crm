@@ -13,7 +13,7 @@ class CustomerForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        available = Q(customer__isnull=True)
+        available = Q(status=Lead.Status.WON, customer__isnull=True)
         if self.instance.pk:
             available |= Q(pk=self.instance.lead_id)
         self.fields["lead"].queryset = Lead.objects.filter(available)

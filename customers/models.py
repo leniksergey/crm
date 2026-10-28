@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 from contracts.models import Contract
 from leads.models import Lead
@@ -17,3 +18,10 @@ class Customer(models.Model):
 
     def __str__(self):
         return str(self.lead)
+
+    def clean(self):
+        super().clean()
+        if self.lead_id and self.lead.status != Lead.Status.WON:
+            raise ValidationError(
+                {"lead": "В активного клиента можно перевести только успешный лид."}
+            )

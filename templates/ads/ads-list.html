@@ -4,7 +4,9 @@
 <h2 class="fw-bold">Рекламные компании</h2>
 <div class="row bg-white px-3 py-3 mx-2 my-5 rounded pb-5 shadow-lg">
     <div class="hstack gap-3 pb-4">
+        {% if perms.ads.add_advertisement %}
         <a href="/ads/new" class="btn btn-success p-2">Создать</a>
+        {% endif %}
         <a href="/ads/statistic" class="btn btn-primary p-2">Статистика</a>
     </div>
     <div class="col">
@@ -12,7 +14,9 @@
             {% for ad in ads %}
             <li class="list-group-item list-group-item-light d-flex justify-content-between">
                 <a href="/ads/{{ ad.pk }}" class="text-decoration-none link-dark">{{ ad.name }}</a>
+                {% if perms.ads.delete_advertisement %}
                 <a href="/ads/{{ ad.pk }}/delete" class="btn btn-danger">Удалить</a>
+                {% endif %}
             </li>
             {% endfor %}
         </ul>

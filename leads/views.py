@@ -13,13 +13,16 @@ from .models import Lead
 from users.mixins import ModelPermissionMixin
 
 
-FIELDS = ["last_name", "first_name", "phone", "email", "ad"]
+FIELDS = ["last_name", "first_name", "phone", "email", "ad", "status"]
 
 
 class LeadListView(ModelPermissionMixin, ListView):
     model = Lead
     template_name = "leads/leads-list.html"
     context_object_name = "leads"
+
+    def get_queryset(self):
+        return Lead.objects.select_related("customer")
 
 
 class LeadDetailView(ModelPermissionMixin, DetailView):

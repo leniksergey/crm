@@ -12,8 +12,7 @@
         <ul class="list-group">
             {% for customer in customers %}
             <li class="list-group-item list-group-item-light d-flex justify-content-between">
-                <a href="/customers/{{ customer.pk }}" class="text-decoration-none link-dark">{{ customer.lead.last_name
-                    }} {{ customer.lead.first_name }}</a>
+                <a href="/customers/{{ customer.pk }}" class="text-decoration-none link-dark">{{ customer.lead.last_name }} {{ customer.lead.first_name }}</a>
                 {% if perms.customers.delete_customer %}
                 <a href="/customers/{{ customer.pk }}/delete" class="btn btn-danger">Удалить</a>
                 {% endif %}

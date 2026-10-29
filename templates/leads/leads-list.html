@@ -12,8 +12,7 @@
         <ul class="list-group">
             {% for lead in leads %}
             <li class="list-group-item list-group-item-light d-flex justify-content-between">
-                <a href="/leads/{{ lead.pk }}" class="text-decoration-none link-dark">{{ lead.last_name }} {{
-                    lead.first_name }}</a>
+                <a href="/leads/{{ lead.pk }}" class="text-decoration-none link-dark">{{ lead.last_name }} {{ lead.first_name }}</a>
                 <span class="badge text-bg-secondary">{{ lead.get_status_display }}</span>
                 <div class="hstack gap-2">
                     {% if perms.customers.add_customer and lead.can_convert_to_customer %}
